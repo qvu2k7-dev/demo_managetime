@@ -12,12 +12,6 @@
     <button id="toggleDarkMode">🌙</button>
   </header>
 
-<select id="taskCategory">
-  <option value="Công việc">Công việc</option>
-  <option value="Học tập">Học tập</option>
-  <option value="Cá nhân">Cá nhân</option>
-</select>
-
   <main>
     <section class="todo">
       <h2>✅ Việc cần làm</h2>
@@ -29,7 +23,7 @@
       <div class="stats">
         <p id="taskStats">Đã hoàn thành: 0 / 0</p>
       </div>
-      <button id="exportBtn">📥 Xuất danh sách</button>
+      <button id="exportBtn" class="secondary-btn">📥 Xuất danh sách</button>
     </section>
 
     <section class="timer">
@@ -39,9 +33,14 @@
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 Vũ | Trợ lý quản lý thời gian</p>
-  </footer>
+  <!-- Popup thống kê -->
+  <div id="popup" class="popup hidden">
+    <div class="popup-content">
+      <span id="popupClose">&times;</span>
+      <h3>📊 Thống kê</h3>
+      <p id="popupStats">Bạn chưa hoàn thành công việc nào</p>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
@@ -49,5 +48,3 @@
 <link rel="stylesheet" href="style.css">
 <script src="phanba.js"></script>
 <script src="Chart.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<canvas id="taskChart" width="400" height="200"></canvas>
