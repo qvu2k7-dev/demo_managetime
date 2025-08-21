@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trợ lý thời gian</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>🕒 Trợ lý thời gian</h1>
+    <button id="toggleDarkMode">🌙</button>
+  </header>
+
+<select id="taskCategory">
+  <option value="Công việc">Công việc</option>
+  <option value="Học tập">Học tập</option>
+  <option value="Cá nhân">Cá nhân</option>
+</select>
+
+  <main>
+    <section class="todo">
+      <h2>✅ Việc cần làm</h2>
+      <div class="input-group">
+        <input type="text" id="taskInput" placeholder="Nhập việc cần làm..." />
+        <button id="addTaskBtn">➕ Thêm</button>
+      </div>
+      <ul id="taskList"></ul>
+      <div class="stats">
+        <p id="taskStats">Đã hoàn thành: 0 / 0</p>
+      </div>
+      <button id="exportBtn">📥 Xuất danh sách</button>
+    </section>
+
+    <section class="timer">
+      <h2>⏳ Pomodoro</h2>
+      <button id="startTimerBtn">▶️ Bắt đầu</button>
+      <p id="timerDisplay">25:00</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Vũ | Trợ lý quản lý thời gian</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
+<link rel="stylesheet" href="style.css">
+<script src="phanba.js"></script>
+<script src="Chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<canvas id="taskChart" width="400" height="200"></canvas>
