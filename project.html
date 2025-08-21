@@ -1,50 +1,113 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trợ lý thời gian</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Pomodoro & Tasks — Nâng cấp</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🕒 Trợ lý thời gian</h1>
-    <button id="toggleDarkMode">🌙</button>
+  <header class="app-header">
+    <h1 class="app-title"><i class="fa-solid fa-fire-flame-curved"></i> Pomodoro & Tasks</h1>
+    <div class="header-actions">
+      <button id="toggleDarkMode" class="btn icon"><i class="fa-solid fa-moon"></i></button>
+    </div>
   </header>
 
-  <main>
-    <section class="todo">
-      <h2>✅ Việc cần làm</h2>
-      <div class="input-group">
-        <input type="text" id="taskInput" placeholder="Nhập việc cần làm..." />
-        <button id="addTaskBtn">➕ Thêm</button>
+  <main class="layout">
+    <!-- Pomodoro -->
+    <section class="card timer-card">
+      <div class="timer-head">
+        <h2 id="timerTitle" class="timer-title">⏳ Pomodoro</h2>
+        <div class="mode-badges">
+          <span class="badge badge-work">25’ Làm việc</span>
+          <span class="badge badge-break">5’ Nghỉ</span>
+        </div>
       </div>
-      <ul id="taskList"></ul>
-      <div class="stats">
-        <p id="taskStats">Đã hoàn thành: 0 / 0</p>
+
+      <div class="timer-visual">
+        <div class="ring-wrap">
+          <svg class="progress-ring" width="180" height="180">
+            <circle class="ring-bg" cx="90" cy="90" r="80"></circle>
+            <circle class="ring" id="progressRing" cx="90" cy="90" r="80"></circle>
+          </svg>
+          <div class="time-readout">
+            <div id="timerDisplay" class="time">25:00</div>
+            <div id="phaseLabel" class="phase">Làm việc</div>
+          </div>
+        </div>
       </div>
-      <button id="exportBtn" class="secondary-btn">📥 Xuất danh sách</button>
+
+      <div class="timer-actions">
+        <button id="startTimerBtn" class="btn primary"><i class="fa-solid fa-play"></i> Bắt đầu</button>
+        <button id="resetTimerBtn" class="btn"><i class="fa-solid fa-rotate-right"></i> Đặt lại</button>
+      </div>
     </section>
 
-    <section class="timer">
-      <h2>⏳ Pomodoro</h2>
-      <button id="startTimerBtn">▶️ Bắt đầu</button>
-      <p id="timerDisplay">25:00</p>
+    <!-- Tasks -->
+    <section class="card tasks-card">
+      <h2 class="section-title"><i class="fa-solid fa-list-check"></i> Công việc</h2>
+
+      <div class="task-input">
+        <input id="taskInput" type="text" placeholder="Nhập việc cần làm và nhấn Enter…" />
+        <button id="addTaskBtn" class="btn"><i class="fa-solid fa-plus"></i> Thêm</button>
+      </div>
+
+      <ul id="taskList" class="task-list"></ul>
+
+      <div class="stats">
+        <div class="stats-row">
+          <div id="taskStats" class="stats-text">Đã hoàn thành: 0 / 0</div>
+          <button id="exportBtn" class="btn ghost"><i class="fa-solid fa-cloud-arrow-down"></i> Xuất</button>
+        </div>
+        <div class="progress">
+          <div id="taskProgressBar" class="progress-bar"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="card dashboard-card">
+      <h2 class="section-title"><i class="fa-solid fa-chart-pie"></i> Mini Dashboard</h2>
+      <canvas id="miniChart" height="160"></canvas>
+      <div class="dashboard-metrics">
+        <div><i class="fa-solid fa-bullseye"></i> <span id="metricRate">0%</span> hoàn thành</div>
+        <div><i class="fa-solid fa-briefcase"></i> <span id="metricTotal">0</span> công việc</div>
+        <div><i class="fa-solid fa-check-circle"></i> <span id="metricDone">0</span> đã xong</div>
+      </div>
     </section>
   </main>
 
-  <!-- Popup thống kê -->
-  <div id="popup" class="popup hidden">
-    <div class="popup-content">
-      <span id="popupClose">&times;</span>
-      <h3>📊 Thống kê</h3>
-      <p id="popupStats">Bạn chưa hoàn thành công việc nào</p>
+  <!-- Export Modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h3><i class="fa-solid fa-file-export"></i> Xuất danh sách</h3>
+        <button id="modalClose" class="btn icon"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div id="exportContent" class="modal-body"></div>
+      <div class="modal-foot">
+        <button id="copyExportBtn" class="btn"><i class="fa-solid fa-copy"></i> Sao chép</button>
+        <button id="modalClose2" class="btn ghost">Đóng</button>
+      </div>
     </div>
   </div>
 
+  <!-- Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  <!-- App -->
   <script src="script.js"></script>
 </body>
 </html>
+
+
+
+
 <link rel="stylesheet" href="style.css">
 <script src="phanba.js"></script>
-<script src="Chart.js"></script>
